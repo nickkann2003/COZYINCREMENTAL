@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.MemoryProfiler;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class SkillTreeNode : MonoBehaviour
 {
-    private SkillNodeState state = SkillNodeState.ACTIVE;
+    private SkillNodeState state = SkillNodeState.NONE;
 
     [Header("Skill Art")]
     [SerializeField] private Sprite icon;
@@ -21,15 +22,35 @@ public class SkillTreeNode : MonoBehaviour
     [Header("Events")]
     public UnityEvent onBuyEvents;
 
+    public bool isRoot = false;
+
+    private ClickableObject clickable;
+
     // Start is called before the first frame update
     void Start()
     {
+        foreach(SkillTreeConnection con in GetComponentsInChildren<SkillTreeConnection>())
+        {
+            if(outgoingConnections.Contains(con)) continue;
+            outgoingConnections.Add(con);
+        }
+        clickable = GetComponent<ClickableObject>();
+
         foreach(SkillTreeConnection con in outgoingConnections)
         {
             con.startPoint = transform.position;
         }
+
         SetIcon();
-        SetState(SkillNodeState.INACTIVE);
+        
+        if (isRoot)
+        {
+            SetState(SkillNodeState.ACTIVE);
+        }
+        else
+        {
+            SetState(SkillNodeState.INACTIVE);
+        }
     }
 
     // Update is called once per frame
@@ -44,22 +65,20 @@ public class SkillTreeNode : MonoBehaviour
         switch (newState)
         {
             case SkillNodeState.INACTIVE:
-                bgObj.color = SkillTreeColors.inactiveBack;
-                iconObj.color = SkillTreeColors.inactiveIcon;
+                state = SkillNodeState.INACTIVE;
+                clickable.Disable();
                 break;
             case SkillNodeState.ACTIVE:
-                bgObj.color = SkillTreeColors.activeBack;
-                iconObj.color = SkillTreeColors.activeIcon;
+                state = SkillNodeState.ACTIVE;
+                clickable.Enable();
                 break;
             case SkillNodeState.HOVER:
-                bgObj.color = SkillTreeColors.hoverBack;
-                iconObj.color = SkillTreeColors.hoverIcon;
+                state = SkillNodeState.HOVER;
                 break;
             case SkillNodeState.SELECTED:
                 break;
             case SkillNodeState.BOUGHT:
-                bgObj.color = SkillTreeColors.boughtBack;
-                iconObj.color = SkillTreeColors.boughtIcon;
+                state = SkillNodeState.BOUGHT;
                 onBuyEvents.Invoke();
                 break;
         }
@@ -92,9 +111,9 @@ public class SkillTreeNode : MonoBehaviour
         }
     }
 
-    public void Click()
+    public void OnClick()
     {
-
+        // Buy logic
     }
 }
 
@@ -104,5 +123,6 @@ public enum SkillNodeState
     ACTIVE,
     HOVER,
     SELECTED,
-    BOUGHT
+    BOUGHT,
+    NONE
 }

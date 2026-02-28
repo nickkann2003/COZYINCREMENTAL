@@ -5,10 +5,12 @@ using UnityEngine.Events;
 
 public class ClickableObject : MonoBehaviour
 {
-    private Animator animator;
+    [SerializeField] private Animator? animator;
     public UnityEvent onClick;
     public UnityEvent onHover;
     public UnityEvent unHover;
+    private bool active = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,34 +25,38 @@ public class ClickableObject : MonoBehaviour
 
     public void Hover()
     {
-        animator.SetTrigger("Highlighted");
+        animator?.SetTrigger("Highlighted");
+        onHover.Invoke();
     }
 
     public void Click()
     {
-        animator.SetTrigger("Pressed");
+        animator?.SetTrigger("Pressed");
         onClick.Invoke();
     }
 
     public void UnClick()
     {
-        animator.SetTrigger("Highlighted");
+        animator?.SetTrigger("Highlighted");
 
     }
 
     public void UnHover()
     {
-        animator.SetTrigger("Normal");
+        animator?.SetTrigger("Normal");
+        unHover.Invoke();
     }
 
     public void Disable()
     {
-
+        animator?.SetBool("active", false);
+        active = false;
     }
 
     public void Enable()
     {
-
+        animator?.SetBool("active", true);
+        active = true;
     }
 
     private void OnMouseEnter()
@@ -71,5 +77,10 @@ public class ClickableObject : MonoBehaviour
     private void OnMouseExit()
     {
         UnHover();
+    }
+
+    private void OnEnable()
+    {
+        animator?.SetBool("active", active);
     }
 }
