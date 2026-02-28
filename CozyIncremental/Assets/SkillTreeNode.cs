@@ -5,12 +5,15 @@ using UnityEngine.Events;
 
 public class SkillTreeNode : MonoBehaviour
 {
-    private SkillNodeState state = SkillNodeState.INACTIVE;
+    private SkillNodeState state = SkillNodeState.ACTIVE;
+
+    [Header("Skill Art")]
+    [SerializeField] private Sprite icon;
+    [SerializeField] private Sprite background;
+
     [Header("Item References")]
-    [SerializeField] private GameObject inactive;
-    [SerializeField] private GameObject active;
-    [SerializeField] private GameObject hovered;
-    [SerializeField] private GameObject bought;
+    [SerializeField] private SpriteRenderer bgObj;
+    [SerializeField] private SpriteRenderer iconObj;
 
     [Header("Connections")]
     public List<SkillTreeConnection> outgoingConnections = new List<SkillTreeConnection>();
@@ -25,6 +28,8 @@ public class SkillTreeNode : MonoBehaviour
         {
             con.startPoint = transform.position;
         }
+        SetIcon();
+        SetState(SkillNodeState.INACTIVE);
     }
 
     // Update is called once per frame
@@ -36,33 +41,60 @@ public class SkillTreeNode : MonoBehaviour
     public void SetState(SkillNodeState newState)
     {
         if(state == newState) return;
-        DeactivateAll();
         switch (newState)
         {
             case SkillNodeState.INACTIVE:
-                inactive.SetActive(true);
+                bgObj.color = SkillTreeColors.inactiveBack;
+                iconObj.color = SkillTreeColors.inactiveIcon;
                 break;
             case SkillNodeState.ACTIVE:
-                active.SetActive(true);
+                bgObj.color = SkillTreeColors.activeBack;
+                iconObj.color = SkillTreeColors.activeIcon;
                 break;
             case SkillNodeState.HOVER:
+                bgObj.color = SkillTreeColors.hoverBack;
+                iconObj.color = SkillTreeColors.hoverIcon;
                 break;
             case SkillNodeState.SELECTED:
-                hovered.SetActive(true);
                 break;
             case SkillNodeState.BOUGHT:
-                bought.SetActive(true);
+                bgObj.color = SkillTreeColors.boughtBack;
+                iconObj.color = SkillTreeColors.boughtIcon;
                 onBuyEvents.Invoke();
                 break;
         }
     }
 
-    private void DeactivateAll()
+    private void SetIcon()
     {
-        inactive.SetActive(false);
-        active.SetActive(false);
-        hovered.SetActive(false);
-        bought.SetActive(false);
+        iconObj.sprite = icon;
+        bgObj.sprite = background;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        SetIcon();
+    }
+
+    public void Hover()
+    {
+        if(state == SkillNodeState.ACTIVE)
+        {
+            SetState(SkillNodeState.HOVER);
+        }
+    }
+
+    public void UnHover()
+    {
+        if(state == SkillNodeState.HOVER)
+        {
+            SetState(SkillNodeState.ACTIVE);
+        }
+    }
+
+    public void Click()
+    {
+
     }
 }
 

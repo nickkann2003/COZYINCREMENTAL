@@ -7,6 +7,8 @@ public class ClickableObject : MonoBehaviour
 {
     private Animator animator;
     public UnityEvent onClick;
+    public UnityEvent onHover;
+    public UnityEvent unHover;
     // Start is called before the first frame update
     void Start()
     {
