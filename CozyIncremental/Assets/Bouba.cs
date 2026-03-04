@@ -8,7 +8,7 @@ public class Bouba : MonoBehaviour
     public int boubaEarned;
     private float boubaPrivate;
 
-    public float boubaPerClick;
+    private float boubaPerClick;
 
     // Leveling stats
     [SerializeField]
@@ -23,10 +23,14 @@ public class Bouba : MonoBehaviour
     public List<LevelReward> levelUpRewards = new List<LevelReward>();
     private Dictionary<int, List<LevelReward>> rewardsDictionary = new Dictionary<int, List<LevelReward>>();
 
+    [Header("Visible Stats")]
+    public float health = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
         AssembleRewards();
+        CalculateStats();
     }
 
     // Update is called once per frame
@@ -43,7 +47,7 @@ public class Bouba : MonoBehaviour
 
     private void LevelUp()
     {
-        nextLevel = (nextLevel * nextLevel * 0.2f) + 10f;
+        nextLevel = nextLevel*1.5f + 10f;
         levelProgress = 0;
         skillPoints += 1;
         level += 1;
@@ -84,5 +88,11 @@ public class Bouba : MonoBehaviour
                 rewardsDictionary.Add(r.level, new List<LevelReward>() { r });
             }
         }
+    }
+
+    public void CalculateStats()
+    {
+        // Bouba per click
+        boubaPerClick = 0.2f + (1f / 5f * health);
     }
 }

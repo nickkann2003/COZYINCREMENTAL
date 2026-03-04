@@ -21,10 +21,10 @@ public class SkillTreeConnection : MonoBehaviour
         }
 
 
-        lineRenderer.startWidth = 0.1f;
-        lineRenderer.endWidth = 0.1f;
+        lineRenderer.startWidth = 0.05f;
+        lineRenderer.endWidth = 0.05f;
         lineRenderer.SetPosition(0, startPoint);
-        lineRenderer.SetPosition(1, endPoint/2f);
+        lineRenderer.SetPosition(1, endPoint);
     }
 
     // Update is called once per frame
