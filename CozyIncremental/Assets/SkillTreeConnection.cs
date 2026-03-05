@@ -21,8 +21,8 @@ public class SkillTreeConnection : MonoBehaviour
         }
 
 
-        lineRenderer.startWidth = 0.05f;
-        lineRenderer.endWidth = 0.05f;
+        lineRenderer.startWidth = 0.05f * transform.lossyScale.x;
+        lineRenderer.endWidth = 0.05f * transform.lossyScale.x;
         lineRenderer.SetPosition(0, startPoint);
         lineRenderer.SetPosition(1, endPoint);
     }
@@ -30,7 +30,10 @@ public class SkillTreeConnection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        lineRenderer.startWidth = 0.05f * transform.lossyScale.x;
+        lineRenderer.endWidth = 0.05f * transform.lossyScale.x;
+        lineRenderer.SetPosition(0, startPoint);
+        lineRenderer.SetPosition(1, endPoint);
     }
 
     private void OnDrawGizmosSelected()
