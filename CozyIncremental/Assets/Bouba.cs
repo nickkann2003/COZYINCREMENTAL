@@ -95,4 +95,14 @@ public class Bouba : MonoBehaviour
         // Bouba per click
         boubaPerClick = 0.2f + (1f / 5f * health);
     }
+
+    public void SpendSkillPoints(int points)
+    {
+        skillPoints -= points;
+    }
+
+    public bool CanAffordSkillPoints(int points)
+    {
+        return skillPoints >= points;
+    }
 }

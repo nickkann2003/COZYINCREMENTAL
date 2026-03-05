@@ -66,19 +66,39 @@ public class SkillTreeNode : MonoBehaviour
         {
             case SkillNodeState.INACTIVE:
                 state = SkillNodeState.INACTIVE;
+                foreach(SkillTreeConnection con in outgoingConnections)
+                {
+                    con.SetState(SkillNodeState.INACTIVE);
+                }
                 clickable.Disable();
                 break;
             case SkillNodeState.ACTIVE:
                 state = SkillNodeState.ACTIVE;
+                foreach (SkillTreeConnection con in outgoingConnections)
+                {
+                    con.SetState(SkillNodeState.INACTIVE);
+                }
                 clickable.Enable();
                 break;
             case SkillNodeState.HOVER:
                 state = SkillNodeState.HOVER;
+                foreach (SkillTreeConnection con in outgoingConnections)
+                {
+                    con.SetState(SkillNodeState.INACTIVE);
+                }
                 break;
             case SkillNodeState.SELECTED:
+                foreach (SkillTreeConnection con in outgoingConnections)
+                {
+                    con.SetState(SkillNodeState.SELECTED);
+                }
                 break;
             case SkillNodeState.BOUGHT:
                 state = SkillNodeState.BOUGHT;
+                foreach (SkillTreeConnection con in outgoingConnections)
+                {
+                    con.SetState(SkillNodeState.BOUGHT);
+                }
                 onBuyEvents.Invoke();
                 break;
         }
@@ -114,6 +134,17 @@ public class SkillTreeNode : MonoBehaviour
     public void OnClick()
     {
         // Buy logic
+        SkillTree.instance.SelectSkill(this);
+    }
+
+    public void EnableAffordNext()
+    {
+        // Afford next connection
+    }
+
+    public void DisableAffordNext()
+    {
+        // Disable un-finished connections
     }
 }
 

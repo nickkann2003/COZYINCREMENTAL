@@ -9,6 +9,7 @@ public class SkillTreeConnection : MonoBehaviour
     public Vector2 startPoint;
     public Vector2 endPoint;
     private LineRenderer lineRenderer;
+    private SkillNodeState state;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +37,38 @@ public class SkillTreeConnection : MonoBehaviour
         lineRenderer.SetPosition(1, endPoint);
     }
 
+    public void SetState(SkillNodeState newState)
+    {
+        if (state == newState)
+            return;
+
+        switch (newState)
+        {
+            case SkillNodeState.INACTIVE:
+                lineRenderer.startColor = SkillTreeColors.darkBrown;
+                lineRenderer.endColor = SkillTreeColors.darkBrown;
+                break;
+            case SkillNodeState.ACTIVE:
+                lineRenderer.startColor = SkillTreeColors.darkPeach;
+                lineRenderer.endColor = SkillTreeColors.darkPeach;
+                break;
+            case SkillNodeState.HOVER:
+                lineRenderer.startColor = SkillTreeColors.peach;
+                lineRenderer.endColor = SkillTreeColors.peach;
+                break;
+            case SkillNodeState.SELECTED:
+                lineRenderer.startColor = SkillTreeColors.mint;
+                lineRenderer.endColor = SkillTreeColors.mint;
+                break;
+            case SkillNodeState.BOUGHT:
+                lineRenderer.startColor = SkillTreeColors.darkPeach;
+                lineRenderer.endColor = SkillTreeColors.darkPeach;
+                break;
+            case SkillNodeState.NONE:
+                break;
+        }
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -45,4 +78,5 @@ public class SkillTreeConnection : MonoBehaviour
         Gizmos.DrawSphere(endPoint + (Vector2)transform.position, 0.1f);
         Gizmos.DrawLine(startPoint, endPoint);
     }
+
 }
