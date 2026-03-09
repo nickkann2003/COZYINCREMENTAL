@@ -1310,7 +1310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allSkills: []
-  bouba: {fileID: 0}
+  bouba: {fileID: 651845479}
   selected: []
 --- !u!1 &1851268084
 GameObject:
