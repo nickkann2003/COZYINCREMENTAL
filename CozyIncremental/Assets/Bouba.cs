@@ -45,6 +45,11 @@ public class Bouba : MonoBehaviour
         GainLevelProgress(boubaPerClick);
     }
 
+    public void NonMultiplierClick(bool ignoreBoubaMult, bool ignoreLevelMult)
+    {
+
+    }
+
     private void LevelUp()
     {
         nextLevel = nextLevel*1.5f + 10f;
@@ -60,15 +65,34 @@ public class Bouba : MonoBehaviour
         }
     }
 
-    private void GainBouba(float bouba)
+    private void GainBouba(float bouba, bool ignoreMult = false)
     {
-        boubaPrivate += bouba;
+        if (ignoreMult)
+        {
+            // Ignore bouba multipliers
+            boubaPrivate += bouba;
+        }
+        else
+        {
+            // Apply bouba multipliers
+            boubaPrivate += bouba;
+        }
+
         boubaEarned = (int)boubaPrivate;
     }
 
-    private void GainLevelProgress(float progress)
+    private void GainLevelProgress(float progress, bool ignoreMult = false)
     {
-        levelProgress += progress;
+        if (ignoreMult)
+        {
+            // Ignore level multipliers
+            levelProgress += progress;
+        }
+        else
+        {
+            // Apply level multipliers
+            levelProgress += progress;
+        }
         if(levelProgress >= nextLevel)
         {
             LevelUp();
