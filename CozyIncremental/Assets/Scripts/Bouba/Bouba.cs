@@ -26,6 +26,9 @@ public class Bouba : MonoBehaviour
     [Header("Visible Stats")]
     public float health = 1f;
 
+    [Header("Status Effects")]
+    public List<StatusEffect> statusEffects = new List<StatusEffect>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +39,10 @@ public class Bouba : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        foreach(StatusEffect e in statusEffects.Where(ef => ef.active))
+        {
+            e.UpdateTick(Time.deltaTime);
+        }
     }
 
     public void BoubaClicked()
@@ -45,9 +51,10 @@ public class Bouba : MonoBehaviour
         GainLevelProgress(boubaPerClick);
     }
 
-    public void NonMultiplierClick(bool ignoreBoubaMult, bool ignoreLevelMult)
+    public void BoubaProc(float amount)
     {
-
+        GainBouba(amount, true, false);
+        GainLevelProgress(amount, true, false);
     }
 
     private void LevelUp()
@@ -65,7 +72,7 @@ public class Bouba : MonoBehaviour
         }
     }
 
-    private void GainBouba(float bouba, bool ignoreMult = false)
+    private void GainBouba(float bouba, bool ignoreMult = false, bool triggerProcs = true)
     {
         if (ignoreMult)
         {
@@ -81,7 +88,7 @@ public class Bouba : MonoBehaviour
         boubaEarned = (int)boubaPrivate;
     }
 
-    private void GainLevelProgress(float progress, bool ignoreMult = false)
+    private void GainLevelProgress(float progress, bool ignoreMult = false, bool triggerProcs = true)
     {
         if (ignoreMult)
         {
@@ -128,5 +135,10 @@ public class Bouba : MonoBehaviour
     public bool CanAffordSkillPoints(int points)
     {
         return skillPoints >= points;
+    }
+
+    public StatusEffect GetStatusEffect<T>()
+    {
+        return statusEffects.Where(e => e.GetType() == typeof(T)).FirstOrDefault();
     }
 }

@@ -2,20 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatusEffectMods 
+[CreateAssetMenu(menuName = "Status Effect Mod")]
+public class StatusEffectMods : ScriptableObject
 {
 
     // ------------------------------ Stack Decay ----------------------------------
-    /// <summary>
-    /// Flat decay per second
-    /// </summary>
-    public float flatDecayPerSecond;
-
-    /// <summary>
-    /// Percentage of stacks decay per second
-    /// </summary>
-    public float pDecayPerSecond;
-
+    [Header("Stack Decay")]
     /// <summary>
     /// Flat stack loss per tick of effect
     /// </summary>
@@ -27,6 +19,16 @@ public class StatusEffectMods
     public float pDecayPerTick;
 
     /// <summary>
+    /// Flat decay per second
+    /// </summary>
+    public float flatDecayPerSecond;
+
+    /// <summary>
+    /// Percentage of stacks decay per second
+    /// </summary>
+    public float pDecayPerSecond;
+
+    /// <summary>
     /// Time until all stacks decay, if not refreshed
     /// </summary>
     public float decayTime;
@@ -36,8 +38,8 @@ public class StatusEffectMods
     /// </summary>
     public float perStackDecayTime;
 
-    // ------------------------------- Stack Refresh
-
+    // ------------------------------- Stack Refresh -----------------------------------
+    [Header("Stack Refresh")]
     /// <summary>
     /// True if new stacks refresh old
     /// </summary>
@@ -49,16 +51,18 @@ public class StatusEffectMods
     public bool canStack;
 
     // ---------------------------- Stack Maximums ---------------------------------
+    [Header("Stack Maximum")]
     /// <summary>
     /// Maximum stacks allowed, -1 if uncapped
     /// </summary>
     public float maxStacks = -1f;
 
     // ---------------------------- Stack Addition ---------------------------------
+    [Header("Stack Addition")]
     /// <summary>
-    /// Flat stacks added when any amount of stacks are added
+    /// Base stacks per time this status effect is applied, before multipliers and flat additions
     /// </summary>
-    public float flatStackAddition;
+    public float baseStacksPerApplication = 1f;
 
     /// <summary>
     /// Multiplier for applied stacks
@@ -66,31 +70,32 @@ public class StatusEffectMods
     public float stackMultiplier = 1f;
 
     /// <summary>
-    /// Base stacks per click on bouba
+    /// Flat stacks added when any amount of stacks are added
     /// </summary>
-    public float baseStacksPerClick;
+    public float flatStackAddition;
 
     // --------------------------- Status Effect Tick Variables --------------------------------
+    [Header("Tick Variables")]
     /// <summary>
     /// Cooldown between ticking effects of this status effect
     /// </summary>
-    public float tickCooldown;
+    public float tickCooldown = 1f;
     public float currentTickCooldown;
 
     /// <summary>
     /// Amount of time this status effect triggers per tick
     /// </summary>
-    public float triggersPerTick;
+    public float triggersPerTick = 1f;
 
     /// <summary>
     /// Multiplier to deltaTime for tick cooldown
     /// </summary>
-    public float tickCooldownRate;
+    public float tickCooldownRate = 1f;
 
     /// <summary>
     /// Multiplier for the maximum cooldown
     /// </summary>
-    public float tickMaxCooldownMultiplier;
+    public float tickMaxCooldownMultiplier=1f;
 
     // ---------------------------- Functions ----------------------------
     /// <summary>
