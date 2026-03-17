@@ -29,6 +29,10 @@ public class Bouba : MonoBehaviour
     [Header("Status Effects")]
     public List<StatusEffect> statusEffects = new List<StatusEffect>();
 
+    // Every X Click triggers
+    [Header("Every X Clicks")]
+    public List<EveryXClicks> everyXClicks = new List<EveryXClicks>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,9 +43,25 @@ public class Bouba : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach(StatusEffect e in statusEffects.Where(ef => ef.active))
+        List<StatusEffect> removals = new List<StatusEffect>();
+
+        // Loop over and tick all status effects
+        foreach (StatusEffect e in statusEffects)
         {
-            e.UpdateTick(Time.deltaTime);
+            if (e.active)
+            {
+                e.UpdateTick(Time.deltaTime);
+            }
+            else
+            {
+                removals.Add(e);
+            }  
+        }
+
+        // remove all status effects that are no longer active
+        foreach (StatusEffect e in removals)
+        {
+            statusEffects.Remove(e);
         }
     }
 
@@ -121,12 +141,16 @@ public class Bouba : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Triggers calculations for damage and other effects using current bouba stats
+    /// </summary>
     public void CalculateStats()
     {
         // Bouba per click
         boubaPerClick = 0.2f + (1f / 5f * health);
     }
 
+    // -------------------------- Skill Point Functions -------------------------
     public void SpendSkillPoints(int points)
     {
         skillPoints -= points;
@@ -137,8 +161,27 @@ public class Bouba : MonoBehaviour
         return skillPoints >= points;
     }
 
+    // -------------------------- Status Effect Functions -------------------------
     public StatusEffect GetStatusEffect<T>()
     {
         return statusEffects.Where(e => e.GetType() == typeof(T)).FirstOrDefault();
+    }
+
+    public bool HasAnyStatusEffect<T>()
+    {
+        return GetStatusEffect<T>() != null;
+    }
+
+    public bool HasStatusEffect(StatusEffect effect)
+    {
+        return statusEffects.Contains(effect);
+    }
+
+    public void ApplyStatusEffect(StatusEffect effect)
+    {
+        if (HasStatusEffect(effect))
+            return;
+
+        statusEffects.Add(effect);
     }
 }

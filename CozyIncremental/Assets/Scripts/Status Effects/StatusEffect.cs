@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[System.Serializable]
 public class StatusEffect
 {
     public Bouba bouba;
@@ -69,6 +70,12 @@ public class StatusEffect
         {
             TimeDecay();
             secondDecayTime = 1f;
+        }
+
+        // If rDecay time is less than 0, remove all stacks
+        if (rDecayTime <= 0)
+        {
+            stacks = 0;
         }
 
         secondDecayTime -= deltaTime;

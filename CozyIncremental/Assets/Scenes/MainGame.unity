@@ -432,6 +432,8 @@ MonoBehaviour:
           m_CallState: 2
     redeemOnLoad: 1
   health: 1
+  statusEffects: []
+  everyXClicks: []
 --- !u!4 &651845480
 Transform:
   m_ObjectHideFlags: 0
@@ -843,7 +845,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1137232232
 Transform:
   m_ObjectHideFlags: 0
