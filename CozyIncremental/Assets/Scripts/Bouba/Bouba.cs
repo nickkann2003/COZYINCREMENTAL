@@ -67,6 +67,12 @@ public class Bouba : MonoBehaviour
 
     public void BoubaClicked()
     {
+        // Count for click effects
+        foreach(EveryXClicks c in everyXClicks)
+        {
+            c.Click();
+        }
+
         GainBouba(boubaPerClick);
         GainLevelProgress(boubaPerClick);
     }

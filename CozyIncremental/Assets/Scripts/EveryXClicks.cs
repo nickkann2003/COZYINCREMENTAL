@@ -27,12 +27,12 @@ public class EveryXClicks
     /// Count a number of clicks for this obj
     /// </summary>
     /// <param name="c">Clicks to count, default 1</param>
-    public void Click(int c = 1)
+    public void Click(int c = 1, bool trigger = true)
     {
         clicks += c;
 
         // Trigger if over clicks
-        if(clicks >= clicksPerTrigger)
+        if(clicks >= clicksPerTrigger && trigger)
         {
             Trigger();
             clicks = 0;
