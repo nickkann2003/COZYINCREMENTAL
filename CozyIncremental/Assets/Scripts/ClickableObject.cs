@@ -5,11 +5,13 @@ using UnityEngine.Events;
 
 public class ClickableObject : MonoBehaviour
 {
+    #nullable enable
     [SerializeField] private Animator? animator;
-    public UnityEvent onClick;
-    public UnityEvent onHover;
-    public UnityEvent unHover;
-    private bool active = true;
+    public UnityEvent? onClick;
+    public UnityEvent? onHover;
+    public UnityEvent? unHover;
+
+    protected bool active = true;
 
     // Start is called before the first frame update
     void Start()
@@ -23,39 +25,45 @@ public class ClickableObject : MonoBehaviour
         
     }
 
-    public void Hover()
+    public virtual void Hover()
     {
-        animator?.SetTrigger("Highlighted");
-        onHover.Invoke();
+        if (animator)
+            animator?.SetTrigger("Highlighted");
+        onHover?.Invoke();
     }
 
-    public void Click()
+    public virtual void Click()
     {
-        animator?.SetTrigger("Pressed");
-        onClick.Invoke();
+        if (animator)
+            animator?.SetTrigger("Pressed");
+        onClick?.Invoke();
     }
 
-    public void UnClick()
+    public virtual void UnClick()
     {
-        animator?.SetTrigger("Highlighted");
+        if (animator)
+            animator?.SetTrigger("Highlighted");
 
     }
 
-    public void UnHover()
+    public virtual void UnHover()
     {
-        animator?.SetTrigger("Normal");
-        unHover.Invoke();
+        if(animator)
+            animator?.SetTrigger("Normal");
+        unHover?.Invoke();
     }
 
-    public void Disable()
+    public virtual void Disable()
     {
-        animator?.SetBool("active", false);
+        if (animator)
+            animator?.SetBool("active", false);
         active = false;
     }
 
-    public void Enable()
+    public virtual void Enable()
     {
-        animator?.SetBool("active", true);
+        if (animator)
+            animator?.SetBool("active", true);
         active = true;
     }
 
@@ -81,6 +89,7 @@ public class ClickableObject : MonoBehaviour
 
     private void OnEnable()
     {
-        animator?.SetBool("active", active);
+        if (animator)
+            animator?.SetBool("active", active);
     }
 }
