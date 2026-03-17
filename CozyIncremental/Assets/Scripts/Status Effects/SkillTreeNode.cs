@@ -110,10 +110,12 @@ public class SkillTreeNode : MonoBehaviour
         bgObj.sprite = background;
     }
 
-    private void OnDrawGizmosSelected()
+#if UNITY_EDITOR
+    private void OnValidate()
     {
         SetIcon();
     }
+#endif
 
     public void Hover()
     {

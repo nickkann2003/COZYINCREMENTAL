@@ -13,6 +13,20 @@ public class SkillTreeConnection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        lineRenderer.startWidth = 0.05f * transform.lossyScale.x;
+        lineRenderer.endWidth = 0.05f * transform.lossyScale.x;
+        lineRenderer.SetPosition(0, startPoint);
+        lineRenderer.SetPosition(1, endPoint);
+    }
+
+    private void CreateLine()
+    {
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.useWorldSpace = false;
 
@@ -26,15 +40,8 @@ public class SkillTreeConnection : MonoBehaviour
         lineRenderer.endWidth = 0.05f * transform.lossyScale.x;
         lineRenderer.SetPosition(0, startPoint);
         lineRenderer.SetPosition(1, endPoint);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        lineRenderer.startWidth = 0.05f * transform.lossyScale.x;
-        lineRenderer.endWidth = 0.05f * transform.lossyScale.x;
-        lineRenderer.SetPosition(0, startPoint);
-        lineRenderer.SetPosition(1, endPoint);
+        lineRenderer.colorGradient.colorKeys[0].color = SkillTreeColors.darkBrown;
+        lineRenderer.colorGradient.colorKeys[1].color = SkillTreeColors.darkBrown;
     }
 
     public void SetState(SkillNodeState newState)
@@ -69,14 +76,11 @@ public class SkillTreeConnection : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmosSelected()
+#if UNITY_EDITOR
+    private void OnValidate()
     {
-        Gizmos.color = Color.red;
-        if (other)
-            endPoint = other.transform.position;
-        Gizmos.DrawSphere(startPoint + (Vector2)transform.position, 0.1f);
-        Gizmos.DrawSphere(endPoint + (Vector2)transform.position, 0.1f);
-        Gizmos.DrawLine(startPoint, endPoint);
+        CreateLine();
     }
+#endif
 
 }
