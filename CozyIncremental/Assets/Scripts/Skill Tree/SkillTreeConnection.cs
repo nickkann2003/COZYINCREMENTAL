@@ -6,32 +6,30 @@ using UnityEngine;
 public class SkillTreeConnection : MonoBehaviour
 {
     public SkillTreeNode other;
-    public Vector2 startPoint;
-    public Vector2 endPoint;
+    public Vector3 startPoint;
+    public Vector3 endPoint;
     private LineRenderer lineRenderer;
     private SkillNodeState state;
     // Start is called before the first frame update
     void Start()
     {
-        
+        CreateLine();
     }
 
     // Update is called once per frame
     void Update()
     {
-        lineRenderer.startWidth = 0.05f * transform.lossyScale.x;
-        lineRenderer.endWidth = 0.05f * transform.lossyScale.x;
-        lineRenderer.SetPosition(0, startPoint);
-        lineRenderer.SetPosition(1, endPoint);
+        UpdateLine();
     }
 
     private void CreateLine()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.useWorldSpace = false;
+        lineRenderer.useWorldSpace = true;
 
         if (other != null)
         {
+            startPoint = transform.position;
             endPoint = other.transform.position;
         }
 
@@ -42,6 +40,19 @@ public class SkillTreeConnection : MonoBehaviour
         lineRenderer.SetPosition(1, endPoint);
         lineRenderer.colorGradient.colorKeys[0].color = SkillTreeColors.darkBrown;
         lineRenderer.colorGradient.colorKeys[1].color = SkillTreeColors.darkBrown;
+    }
+
+    private void UpdateLine()
+    {
+        if (other != null)
+        {
+            startPoint = transform.position;
+            endPoint = other.transform.position;
+            lineRenderer.SetPosition(0, startPoint);
+            lineRenderer.SetPosition(1, endPoint);
+            lineRenderer.startWidth = 0.05f * transform.lossyScale.x;
+            lineRenderer.endWidth = 0.05f * transform.lossyScale.x;
+        }
     }
 
     public void SetState(SkillNodeState newState)

@@ -17,10 +17,17 @@ public class SkillTreeNode : MonoBehaviour
     [SerializeField] private SpriteRenderer iconObj;
 
     [Header("Connections")]
-    public List<SkillTreeConnection> outgoingConnections = new List<SkillTreeConnection>();
+    public List<SkillTreeNode> connectedNodes = new List<SkillTreeNode>();
+    public GameObject skillTreeConnectionPrefab;
+    private List<SkillTreeConnection> outgoingConnections = new List<SkillTreeConnection>();
 
     [Header("Events")]
     public UnityEvent onBuyEvents;
+
+    [Header("Description")]
+    public string internalName;
+    public string skillName;
+    public string description;
 
     public bool isRoot = false;
 
@@ -32,6 +39,12 @@ public class SkillTreeNode : MonoBehaviour
         foreach(SkillTreeConnection con in GetComponentsInChildren<SkillTreeConnection>())
         {
             if(outgoingConnections.Contains(con)) continue;
+            outgoingConnections.Add(con);
+        }
+        foreach(SkillTreeNode n in connectedNodes)
+        {
+            SkillTreeConnection con = Instantiate(skillTreeConnectionPrefab, transform).GetComponent<SkillTreeConnection>();
+            con.other = n;
             outgoingConnections.Add(con);
         }
         clickable = GetComponent<ClickableObject>();
@@ -114,6 +127,17 @@ public class SkillTreeNode : MonoBehaviour
     private void OnValidate()
     {
         SetIcon();
+        gameObject.name = "Skill - " + internalName + " - " + connectedNodes.Count + " (" + skillName + ")";
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        foreach (SkillTreeNode n in connectedNodes)
+        {
+            Gizmos.DrawLine(transform.position, n.transform.position);
+        }
+
     }
 #endif
 
