@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.MemoryProfiler;
@@ -64,6 +65,9 @@ public class SkillTreeNode : MonoBehaviour
         {
             SetState(SkillNodeState.INACTIVE);
         }
+
+        // Add this skill to all skills
+        SkillTree.instance.allSkills.Add(this);
     }
 
     // Update is called once per frame
@@ -95,22 +99,19 @@ public class SkillTreeNode : MonoBehaviour
                 break;
             case SkillNodeState.HOVER:
                 state = SkillNodeState.HOVER;
-                foreach (SkillTreeConnection con in outgoingConnections)
-                {
-                    con.SetState(SkillNodeState.INACTIVE);
-                }
                 break;
             case SkillNodeState.SELECTED:
                 foreach (SkillTreeConnection con in outgoingConnections)
                 {
                     con.SetState(SkillNodeState.SELECTED);
                 }
+                state = SkillNodeState.SELECTED;
                 break;
             case SkillNodeState.BOUGHT:
                 state = SkillNodeState.BOUGHT;
                 foreach (SkillTreeConnection con in outgoingConnections)
                 {
-                    con.SetState(SkillNodeState.BOUGHT);
+                    con.SetState(SkillNodeState.SELECTED);
                 }
                 onBuyEvents.Invoke();
                 break;
@@ -160,17 +161,24 @@ public class SkillTreeNode : MonoBehaviour
     public void OnClick()
     {
         // Buy logic
-        SkillTree.instance.SelectSkill(this);
+        if(state != SkillNodeState.INACTIVE && state != SkillNodeState.BOUGHT && state != SkillNodeState.SELECTED)
+        {
+            SkillTree.instance.SelectSkill(this);
+            SetState(SkillNodeState.SELECTED);
+        }
     }
 
-    public void EnableAffordNext()
+    public void SetAffordNext(bool canAfford)
     {
-        // Afford next connection
+        foreach (SkillTreeConnection con in outgoingConnections)
+        {
+            con.SetBuyable(canAfford);
+        }
     }
 
-    public void DisableAffordNext()
+    public void SubscribeToBuy(UnityAction call)
     {
-        // Disable un-finished connections
+        onBuyEvents.AddListener(call);
     }
 }
 

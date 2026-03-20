@@ -43,12 +43,12 @@ public class ZoomAndScroll : MonoBehaviour
     {
         // Zoom in and out with the mouse scroll wheel
         float scrollInput = Input.GetAxis("Mouse ScrollWheel");
-        
+
         minX = minXInitial * transform.localScale.x + margins.x;
         minY = minYInitial * transform.localScale.y + margins.y;
         maxX = maxXInitial * transform.localScale.x - margins.x;
         maxY = maxYInitial * transform.localScale.x - margins.y;
-        
+
         if (scrollInput != 0)
         {
             float targetZoom = Mathf.Clamp(transform.localScale.x + scrollInput * zoomSpeed, minZoom, maxZoom);
@@ -62,8 +62,10 @@ public class ZoomAndScroll : MonoBehaviour
             movement.z = 0;
             transform.position += movement;
 
-
-
+            minX = minXInitial * transform.localScale.x + margins.x;
+            minY = minYInitial * transform.localScale.y + margins.y;
+            maxX = maxXInitial * transform.localScale.x - margins.x;
+            maxY = maxYInitial * transform.localScale.x - margins.y;
 
             // scroll position needs to check its clamp when zoom is changed
             Vector3 targetPosition = new Vector3(

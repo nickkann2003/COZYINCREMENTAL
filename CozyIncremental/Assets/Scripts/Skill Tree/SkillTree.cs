@@ -51,6 +51,7 @@ public class SkillTree : MonoBehaviour
             node.SetState(SkillNodeState.SELECTED);
             selected.Add(node); 
         }
+        runAffordCheck(CheckAffordSkills());
     }
 
     public bool CheckAffordSkills()
@@ -59,12 +60,14 @@ public class SkillTree : MonoBehaviour
         {
             return true;
         }
-
         return false;
     }
 
-    private void runAffordCheck()
+    private void runAffordCheck(bool canAfford)
     {
-
+        foreach(SkillTreeNode node in selected)
+        {
+            node.SetAffordNext(canAfford);
+        }
     }
 }
