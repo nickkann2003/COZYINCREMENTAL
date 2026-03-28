@@ -1,44 +1,57 @@
+using System;
 using System.Net;
 using UnityEngine;
 using UnityEngine.Events;
 
+
 public class BounceTrigger : MonoBehaviour
 {
-    [Header("Starting Position")]
-    public Vector3 startPos;
+    public BounceTriggerInfo info;
 
-    [Header("Bounce Vars")]
-    public float bounceDuration = 1f;
+    private Vector3 startPos;
+    private float bounceDuration = 1f;
     private float cBD = 0f;
-    public Vector3 bounceTo;
-    public AnimationCurve bounceCurve;
+    private Vector3 bounceTo;
+    private AnimationCurve bounceCurve;
     private Vector3 bounceControl;
-
-    [Header("Targeting Delay")]
-    public float targetDuration = 0.2f;
+    private float targetDuration = 0.2f;
     private float cTD = 0f;
-
-    [Header("Hit Vars")]
-    public float hitDuration = 0.2f;
+    private float hitDuration = 0.2f;
     private float cHD = 0f;
-    public Vector3 target;
+    private Vector3 target;
+    private int numBounces = 1;
+    private UnityEvent onHitEvent;
+    private UnityEvent finalHitEvent;
+    private GameObject hitParticles;
 
-    [Header("Bounces")]
-    public int numBounces = 1;
-
-    [Header("Hit Events")]
-    public UnityEvent onHitEvent;
-    public UnityEvent finalHitEvent;
-
-    [Header("Particles")]
-    public GameObject hitParticles;
-
-
+    public BounceSpawner spawner;
     private int state;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        
+
+    }
+
+    public void Create(BounceTriggerInfo i = null)
+    {
+        info = i == null ? info : i;
+        
+        state = 0;
+
         bounceControl = (startPos + bounceTo) / 2f + (Vector3.up);
+        startPos = info.startPos;
+        bounceDuration = info.bounceDuration;
+        bounceTo = info.bounceTo;
+        bounceCurve = info.bounceCurve;
+        targetDuration = info.targetDuration;
+        hitDuration = info.hitDuration;
+        target = info.target;
+        numBounces = info.numBounces;
+        onHitEvent = info.onHitEvent;
+        finalHitEvent = info.finalHitEvent;
+        hitParticles = info.hitParticles;
     }
 
     // Update is called once per frame
@@ -47,7 +60,7 @@ public class BounceTrigger : MonoBehaviour
         switch (state)
         {
             case 0:
-                transform.position = CalculateQuadraticBezierPoint(cBD/bounceDuration, startPos, bounceControl, bounceTo);
+                transform.position = CalculateQuadraticBezierPoint(Mathf.Sqrt(cBD/bounceDuration), startPos, bounceControl, bounceTo);
                 cBD += Time.deltaTime;
                 if (cBD >= bounceDuration)
                 {
@@ -66,20 +79,20 @@ public class BounceTrigger : MonoBehaviour
             case 2:
                 transform.position = Vector3.Lerp(bounceTo, target, cHD / hitDuration);
                 cHD += Time.deltaTime;
-                if (cHD >= hitDuration)
+                if (cHD >= hitDuration*0.9f)
                 {
                     cHD = 0f;
                     onHitEvent.Invoke();
+                    Instantiate(hitParticles).transform.position = transform.position;
                     numBounces--;
-                    if (numBounces > 1)
+                    if (numBounces > 0)
                     {
                         state = 0;
-                        numBounces--;
                     }
                     else
                     {
                         finalHitEvent.Invoke();
-                        Destroy(gameObject);
+                        DisableSelf();
                     }
                 }
                 break;
@@ -91,4 +104,39 @@ public class BounceTrigger : MonoBehaviour
         // Formula: B(t) = (1-t)^2 * P0 + 2*(1-t)*t * P1 + t^2 * P2
         return Mathf.Pow(1f - t, 2f) * p0 + 2f * (1f - t) * t * p1 + Mathf.Pow(t, 2f) * p2;
     }
+
+    private void DisableSelf()
+    {
+        spawner.inactiveTriggers.Push(this);
+        gameObject.SetActive(false);
+    }
+}
+
+[Serializable]
+public class BounceTriggerInfo
+{
+    [Header("Starting Position")]
+    public Vector3 startPos;
+
+    [Header("Bounce Vars")]
+    public float bounceDuration = 1f;
+    public Vector3 bounceTo;
+    public AnimationCurve bounceCurve;
+
+    [Header("Targeting Delay")]
+    public float targetDuration = 0.2f;
+
+    [Header("Hit Vars")]
+    public float hitDuration = 0.2f;
+    public Vector3 target;
+
+    [Header("Bounces")]
+    public int numBounces = 1;
+
+    [Header("Hit Events")]
+    public UnityEvent onHitEvent;
+    public UnityEvent finalHitEvent;
+
+    [Header("Particles")]
+    public GameObject hitParticles;
 }

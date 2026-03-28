@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BounceSpawner : MonoBehaviour
 {
@@ -10,11 +13,16 @@ public class BounceSpawner : MonoBehaviour
     public float minDistance;
     public float maxDistance;
 
+    private Transform bounceTriggerPool;
+    public Stack<BounceTrigger> inactiveTriggers = new Stack<BounceTrigger>();
+
+    [SerializeField] private BounceTriggerInfo triggerValues;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        bounceTriggerPool = new GameObject("BounceTriggers Pool").transform;
     }
 
     // Update is called once per frame
@@ -25,12 +33,27 @@ public class BounceSpawner : MonoBehaviour
 
     public void Spawn()
     {
-        GameObject created = Instantiate(prefab, transform);
-        BounceTrigger trigger = created.GetComponent<BounceTrigger>();
-        trigger.startPos = transform.position;
+
+        BounceTrigger trigger;
+        if(inactiveTriggers.Count <= 0)
+        {
+            GameObject created = Instantiate(prefab, bounceTriggerPool);
+            trigger = created.GetComponent<BounceTrigger>();
+            trigger.spawner = this;
+        }
+        else
+        {
+            trigger = inactiveTriggers.Pop();
+            trigger.gameObject.SetActive(true);
+        }
+
+        triggerValues.startPos = transform.position;
+            
         float r = Random.Range(minDistance, maxDistance);
         float a = Random.Range(90 - arcDeg / 2f, 90 + arcDeg / 2f);
         Vector3 bounceVector = new Vector3(Mathf.Cos(a * Mathf.Deg2Rad) * r, Mathf.Sin(a * Mathf.Deg2Rad) *r, 0);
-        trigger.bounceTo = transform.position + bounceVector;
+        triggerValues.bounceTo = transform.position + bounceVector;
+
+        trigger.Create(triggerValues);
     }
 }

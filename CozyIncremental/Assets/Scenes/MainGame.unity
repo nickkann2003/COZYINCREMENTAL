@@ -4245,6 +4245,27 @@ MonoBehaviour:
   arcDeg: 250
   minDistance: 1
   maxDistance: 3
+  triggerValues:
+    startPos: {x: 0, y: 0, z: 0}
+    bounceDuration: 1
+    bounceTo: {x: 0, y: 0, z: 0}
+    bounceCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    targetDuration: 0.05
+    hitDuration: 0.1
+    target: {x: 0, y: 0, z: 0}
+    numBounces: 2
+    onHitEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    finalHitEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    hitParticles: {fileID: 7813201471764580160, guid: c775b544f1ac6e6418342edc516d603f, type: 3}
 --- !u!4 &1614930657
 Transform:
   m_ObjectHideFlags: 0
