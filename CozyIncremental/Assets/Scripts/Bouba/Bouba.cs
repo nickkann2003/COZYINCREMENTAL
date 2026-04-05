@@ -8,7 +8,7 @@ public class Bouba : MonoBehaviour
     public int boubaEarned;
     private float boubaPrivate;
 
-    private float boubaPerClick;
+    public Stat boubaPerClick;
 
     // Leveling stats
     [SerializeField]
@@ -32,6 +32,10 @@ public class Bouba : MonoBehaviour
     // Every X Click triggers
     [Header("Every X Clicks")]
     public List<EveryXClicks> everyXClicks = new List<EveryXClicks>();
+
+    [Header("Upgrades")]
+    [SerializeField]
+    public List<UpgradeBase> upgrades = new List<UpgradeBase>();
 
     // Start is called before the first frame update
     void Start()
@@ -73,8 +77,8 @@ public class Bouba : MonoBehaviour
             c.Click();
         }
 
-        GainBouba(boubaPerClick);
-        GainLevelProgress(boubaPerClick);
+        GainBouba(boubaPerClick.FinalValue);
+        GainLevelProgress(boubaPerClick.FinalValue);
     }
 
     public void BoubaProc(float amount)
@@ -153,7 +157,7 @@ public class Bouba : MonoBehaviour
     public void CalculateStats()
     {
         // Bouba per click
-        boubaPerClick = 0.2f + (1f / 5f * health);
+        boubaPerClick.BaseValue = 0.2f + (1f / 5f * health);
     }
 
     // -------------------------- Skill Point Functions -------------------------

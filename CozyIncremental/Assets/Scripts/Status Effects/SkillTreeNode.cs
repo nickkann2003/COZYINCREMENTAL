@@ -24,6 +24,7 @@ public class SkillTreeNode : MonoBehaviour
 
     [Header("Events")]
     public UnityEvent onBuyEvents;
+    public UpgradeTypes upgradeTypes;
 
     [Header("Description")]
     public string internalName;

@@ -48,12 +48,17 @@ public class BounceSpawner : MonoBehaviour
         }
 
         triggerValues.startPos = transform.position;
-            
+
+        trigger.calcBounceTo = GetBounceTo;
+        trigger.Create(triggerValues);
+    }
+
+    public Vector3 GetBounceTo()
+    {
         float r = Random.Range(minDistance, maxDistance);
         float a = Random.Range(90 - arcDeg / 2f, 90 + arcDeg / 2f);
-        Vector3 bounceVector = new Vector3(Mathf.Cos(a * Mathf.Deg2Rad) * r, Mathf.Sin(a * Mathf.Deg2Rad) *r, 0);
-        triggerValues.bounceTo = transform.position + bounceVector;
-
-        trigger.Create(triggerValues);
+        Vector3 bounceVector = new Vector3(Mathf.Cos(a * Mathf.Deg2Rad) * r, Mathf.Sin(a * Mathf.Deg2Rad) * r, 0);
+        bounceVector += transform.position;
+        return bounceVector;
     }
 }

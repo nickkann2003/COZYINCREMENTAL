@@ -1,5 +1,6 @@
 using System;
 using System.Net;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -24,6 +25,8 @@ public class BounceTrigger : MonoBehaviour
     private UnityEvent finalHitEvent;
     private GameObject hitParticles;
 
+    public Func<Vector3> calcBounceTo;
+
     public BounceSpawner spawner;
     private int state;
 
@@ -43,7 +46,7 @@ public class BounceTrigger : MonoBehaviour
         bounceControl = (startPos + bounceTo) / 2f + (Vector3.up);
         startPos = info.startPos;
         bounceDuration = info.bounceDuration;
-        bounceTo = info.bounceTo;
+        //bounceTo = info.bounceTo;
         bounceCurve = info.bounceCurve;
         targetDuration = info.targetDuration;
         hitDuration = info.hitDuration;
@@ -52,6 +55,7 @@ public class BounceTrigger : MonoBehaviour
         onHitEvent = info.onHitEvent;
         finalHitEvent = info.finalHitEvent;
         hitParticles = info.hitParticles;
+        bounceTo = calcBounceTo();
     }
 
     // Update is called once per frame
@@ -60,7 +64,8 @@ public class BounceTrigger : MonoBehaviour
         switch (state)
         {
             case 0:
-                transform.position = CalculateQuadraticBezierPoint(Mathf.Sqrt(cBD/bounceDuration), startPos, bounceControl, bounceTo);
+                float t = bounceCurve.Evaluate(Mathf.Sqrt(cBD / bounceDuration));
+                transform.position = CalculateQuadraticBezierPoint(t, startPos, bounceControl, bounceTo);
                 cBD += Time.deltaTime;
                 if (cBD >= bounceDuration)
                 {
@@ -88,6 +93,7 @@ public class BounceTrigger : MonoBehaviour
                     if (numBounces > 0)
                     {
                         state = 0;
+                        bounceTo = calcBounceTo();
                     }
                     else
                     {
