@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.MemoryProfiler;
 using UnityEngine;
 using UnityEngine.Events;
@@ -24,7 +25,6 @@ public class SkillTreeNode : MonoBehaviour
 
     [Header("Events")]
     public UnityEvent onBuyEvents;
-    public UpgradeTypes upgradeTypes;
 
     [Header("Description")]
     public string internalName;
@@ -35,9 +35,21 @@ public class SkillTreeNode : MonoBehaviour
 
     private ClickableObject clickable;
 
+    // All upgrades tied to this skill node
+    // NOTE: To add upgrades, add the type to the enum, add a field for the upgrade, add it to the SkillNodeEditor, and add it to the upgrades list in Start()
+    [Header("Upgrades")]
+    public UpgradeTypes upgradeTypes;
+    [field: NonSerialized] public DamageUpgrade damageUpgrade;
+    private List<IUpgrade> upgrades = new List<IUpgrade>();
+
+
     // Start is called before the first frame update
     void Start()
     {
+        // Store all upgrades
+        upgrades.Add(damageUpgrade);
+
+
         foreach(SkillTreeConnection con in GetComponentsInChildren<SkillTreeConnection>())
         {
             if(outgoingConnections.Contains(con)) continue;
@@ -180,6 +192,24 @@ public class SkillTreeNode : MonoBehaviour
     public void SubscribeToBuy(UnityAction call)
     {
         onBuyEvents.AddListener(call);
+    }
+
+    /// <summary>
+    /// Applies all upgrades tied to this skill tree node
+    /// </summary>
+    /// <param name="b"></param>
+    public void ApplyAllUpgrades(Bouba b)
+    {
+
+    }
+
+    /// <summary>
+    /// Removes all upgrades tied to this skill tree node
+    /// </summary>
+    /// <param name="b"></param>
+    public void RemoveAllUpgrades(Bouba b)
+    {
+
     }
 }
 
