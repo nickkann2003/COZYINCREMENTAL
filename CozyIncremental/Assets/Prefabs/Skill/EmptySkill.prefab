@@ -153,6 +153,7 @@ MonoBehaviour:
   skillName: 
   description: 
   isRoot: 1
+  upgradeTypes: 0
 --- !u!114 &172805853174121646
 MonoBehaviour:
   m_ObjectHideFlags: 0
