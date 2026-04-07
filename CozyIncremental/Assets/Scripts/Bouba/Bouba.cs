@@ -41,6 +41,7 @@ public class Bouba : MonoBehaviour
     void Start()
     {
         AssembleRewards();
+        boubaPerClick = new Stat(0);
         CalculateStats();
     }
 

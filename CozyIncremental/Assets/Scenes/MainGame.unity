@@ -5748,6 +5748,7 @@ MonoBehaviour:
   scrollLerpSpeed: 0.1
   topRightMarker: {fileID: 438360863}
   botLeftMarker: {fileID: 552187044}
+  rend: {fileID: 990723114}
 --- !u!114 &2013678918 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2039591609346089920, guid: e5ba38712d004344ba6875f3d34ca87a, type: 3}
