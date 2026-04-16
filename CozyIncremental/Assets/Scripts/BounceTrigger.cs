@@ -1,6 +1,4 @@
 using System;
-using System.Net;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,6 +12,7 @@ public class BounceTrigger : MonoBehaviour
     private float cBD = 0f;
     private Vector3 bounceTo;
     private AnimationCurve bounceCurve;
+    private AnimationCurve rotationCurve;
     private Vector3 bounceControl;
     private float targetDuration = 0.2f;
     private float cTD = 0f;
@@ -56,6 +55,9 @@ public class BounceTrigger : MonoBehaviour
         finalHitEvent = info.finalHitEvent;
         hitParticles = info.hitParticles;
         bounceTo = calcBounceTo();
+        rotationCurve = info.rotationCurve;
+        rotationCurve.MoveKey(1, new Keyframe(rotationCurve[1].time, rotationCurve[1].value * UnityEngine.Random.Range(0.9f, 1.1f)));
+        transform.localScale = transform.localScale * UnityEngine.Random.Range(info.sizeMin, info.sizeMax);
     }
 
     // Update is called once per frame
@@ -66,6 +68,8 @@ public class BounceTrigger : MonoBehaviour
             case 0:
                 float t = bounceCurve.Evaluate(Mathf.Sqrt(cBD / bounceDuration));
                 transform.position = CalculateQuadraticBezierPoint(t, startPos, bounceControl, bounceTo);
+                float r = rotationCurve.Evaluate(cBD / (bounceDuration + targetDuration));
+                transform.rotation = Quaternion.Euler(0, 0, r);
                 cBD += Time.deltaTime;
                 if (cBD >= bounceDuration)
                 {
@@ -75,6 +79,8 @@ public class BounceTrigger : MonoBehaviour
                 break;
             case 1:
                 cTD += Time.deltaTime;
+                float tr = rotationCurve.Evaluate((cTD+bounceDuration) / (targetDuration + targetDuration));
+                transform.rotation = Quaternion.Euler(0, 0, tr);
                 if (cTD >= targetDuration)
                 {
                     cTD = 0f;
@@ -128,6 +134,7 @@ public class BounceTriggerInfo
     public float bounceDuration = 1f;
     public Vector3 bounceTo;
     public AnimationCurve bounceCurve;
+    public AnimationCurve rotationCurve;
 
     [Header("Targeting Delay")]
     public float targetDuration = 0.2f;
@@ -138,6 +145,10 @@ public class BounceTriggerInfo
 
     [Header("Bounces")]
     public int numBounces = 1;
+
+    [Header("Size")]
+    public float sizeMin;
+    public float sizeMax;
 
     [Header("Hit Events")]
     public UnityEvent onHitEvent;

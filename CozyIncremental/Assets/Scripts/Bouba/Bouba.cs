@@ -8,6 +8,8 @@ public class Bouba : MonoBehaviour
     public int boubaEarned;
     private float boubaPrivate;
 
+    public BoubaContainer container;
+
     public Stat boubaPerClick;
 
     // Leveling stats
@@ -117,6 +119,7 @@ public class Bouba : MonoBehaviour
         }
 
         boubaEarned = (int)boubaPrivate;
+        container.ContainerDamage(bouba);
     }
 
     private void GainLevelProgress(float progress, bool ignoreMult = false, bool triggerProcs = true)

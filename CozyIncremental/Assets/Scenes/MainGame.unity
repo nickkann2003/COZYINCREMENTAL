@@ -1915,6 +1915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boubaEarned: 0
+  container: {fileID: 950088237}
   nextLevel: 10
   levelProgress: 0
   level: 0
@@ -4278,20 +4279,62 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 2
-        outSlope: 2
+        inSlope: 1.1231573
+        outSlope: 1.1231573
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.99646497
+      - serializedVersion: 3
+        time: 0.90289813
+        value: 1.0001009
+        inSlope: 0.034652065
+        outSlope: 0.034652065
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.9875354
       - serializedVersion: 3
         time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
+        value: 1.0043124
+        inSlope: -1.6172465
+        outSlope: -1.6172465
         tangentMode: 0
         weightedMode: 0
+        inWeight: 0.3545383
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    rotationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 1279.267
+        outSlope: 1279.267
+        tangentMode: 34
+        weightedMode: 0
         inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.41227126
+        value: 528.405
+        inSlope: 299.0998
+        outSlope: 299.0998
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.7478938
+      - serializedVersion: 3
+        time: 1
+        value: 593.87317
+        inSlope: 111.39176
+        outSlope: 111.39176
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -4300,9 +4343,23 @@ MonoBehaviour:
     hitDuration: 0.1
     target: {x: 0, y: 0, z: 0}
     numBounces: 2
+    sizeMin: 0.8
+    sizeMax: 1.2
     onHitEvent:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 651845479}
+          m_TargetAssemblyTypeName: Bouba, Assembly-CSharp
+          m_MethodName: BoubaProc
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0.1
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     finalHitEvent:
       m_PersistentCalls:
         m_Calls: []
