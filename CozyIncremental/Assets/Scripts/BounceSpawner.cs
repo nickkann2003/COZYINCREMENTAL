@@ -16,12 +16,13 @@ public class BounceSpawner : MonoBehaviour
     private Transform bounceTriggerPool;
     public Stack<BounceTrigger> inactiveTriggers = new Stack<BounceTrigger>();
 
-    [SerializeField] private BounceTriggerInfo triggerValues;
+    private BounceTriggerInfo triggerValues;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        triggerValues = Bouba.instance.bounceTriggerValues;
         bounceTriggerPool = new GameObject("BounceTriggers Pool").transform;
     }
 
