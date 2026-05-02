@@ -57,7 +57,10 @@ public class BounceTrigger : MonoBehaviour
         bounceTo = calcBounceTo();
         rotationCurve = info.rotationCurve;
         rotationCurve.MoveKey(1, new Keyframe(rotationCurve[1].time, rotationCurve[1].value * UnityEngine.Random.Range(0.9f, 1.1f)));
-        transform.localScale = transform.localScale * UnityEngine.Random.Range(info.sizeMin, info.sizeMax);
+
+        // TODO: This is hard coded initial size to get around a pooling multiplying scale bug, find a workaround later
+        Vector3 initialScale = new Vector3(0.4f, 0.4f, 0.4f);
+        transform.localScale = initialScale * UnityEngine.Random.Range(info.sizeMin, info.sizeMax);
     }
 
     // Update is called once per frame

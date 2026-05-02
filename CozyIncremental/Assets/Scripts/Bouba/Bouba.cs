@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Bouba : MonoBehaviour
 {
+    public static Bouba instance;
+
     public int boubaEarned;
     private float boubaPrivate;
 
@@ -35,9 +37,24 @@ public class Bouba : MonoBehaviour
     [Header("Every X Clicks")]
     public List<EveryXClicks> everyXClicks = new List<EveryXClicks>();
 
+    [Header("Trigger Spawns")]
+    [SerializeField] public BounceTriggerInfo bounceTriggerValues;
+
     [Header("Upgrades")]
     [SerializeField]
     public List<UpgradeBase> upgrades = new List<UpgradeBase>();
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -84,10 +101,10 @@ public class Bouba : MonoBehaviour
         GainLevelProgress(boubaPerClick.FinalValue);
     }
 
-    public void BoubaProc(float amount)
+    public void BoubaProc(float mult)
     {
-        GainBouba(amount, true, false);
-        GainLevelProgress(amount, true, false);
+        GainBouba(mult*boubaPerClick.FinalValue, true, false);
+        GainLevelProgress(mult*boubaPerClick.FinalValue, true, false);
     }
 
     private void LevelUp()
