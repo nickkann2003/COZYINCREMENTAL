@@ -1991,101 +1991,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  bounceTriggerValues:
-    startPos: {x: 0, y: 0, z: 0}
-    bounceDuration: 1
-    bounceTo: {x: 0, y: 0, z: 0}
-    bounceCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 1.1231573
-        outSlope: 1.1231573
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.99646497
-      - serializedVersion: 3
-        time: 0.90289813
-        value: 1.0001009
-        inSlope: 0.034652065
-        outSlope: 0.034652065
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.9875354
-      - serializedVersion: 3
-        time: 1
-        value: 1.0043124
-        inSlope: -1.6172465
-        outSlope: -1.6172465
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.3545383
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    rotationCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: -520.5673
-        outSlope: -520.5673
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.5465719
-        value: -283.52747
-        inSlope: 443.47824
-        outSlope: 443.47824
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1
-        value: 354.68335
-        inSlope: 1407.5238
-        outSlope: 1407.5238
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    targetDuration: 0.05
-    hitDuration: 0.1
-    target: {x: 0, y: 0, z: 0}
-    numBounces: 2
-    sizeMin: 0.5
-    sizeMax: 1.5
-    onHitEvent:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 651845479}
-          m_TargetAssemblyTypeName: Bouba, Assembly-CSharp
-          m_MethodName: BoubaProc
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0.1
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    finalHitEvent:
-      m_PersistentCalls:
-        m_Calls: []
-    hitParticles: {fileID: 7813201471764580160, guid: c775b544f1ac6e6418342edc516d603f, type: 3}
   upgrades:
   - Name: 
     Description: 
@@ -4569,7 +4474,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!73398921 &1674962906
 VFXRenderer:
   serializedVersion: 1
@@ -4578,7 +4483,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1674962905}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1

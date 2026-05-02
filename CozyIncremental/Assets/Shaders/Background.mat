@@ -44,7 +44,14 @@ Material:
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
+    - _BaseDarkness: 0
+    - _Cell_Density: 2
+    - _Darkness: 0
+    - _LineDarkness: 0.58
+    - _Speed: 2.18
+    - _Subtraction: 1.8
     m_Colors:
-    - _Color: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 0, g: 0.72492695, b: 1, a: 1}
+    - _LinesColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
