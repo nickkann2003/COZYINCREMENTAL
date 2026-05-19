@@ -14,9 +14,18 @@ public class BoubaContainer : MonoBehaviour
     private float recentDamage = 0f;
     private float incMax = 2f;
 
+    private float cSize = 1f;
+    private float tempSize;
+
+    /// <summary>
+    /// For waves
+    /// </summary>
+    private bool usingWaves = true;
+    public Material wavesMaterial;
+
     private void Update()
     {
-        float tempSize = Mathf.Clamp(1 + (recentDamage/20f), tempSizeMin, Mathf.Clamp(tempSizeMax, ogSizeMax, incMax));
+        tempSize = Mathf.Lerp(tempSize, Mathf.Clamp(1 + (recentDamage / 20f), tempSizeMin, Mathf.Clamp(tempSizeMax, ogSizeMax, incMax)), 0.2f);
         AdjustSize(tempSize);
     }
 
@@ -48,6 +57,17 @@ public class BoubaContainer : MonoBehaviour
         Vector3 lerped = Vector3.Lerp(transform.localScale, new Vector3(baseSize * baseMultiplier * multiplier * mult, baseSize * baseMultiplier * multiplier * mult, baseSize * baseMultiplier * multiplier * mult), 0.3f);
         //transform.localScale = new Vector3(baseSize * baseMultiplier * multiplier * mult, baseSize * baseMultiplier * multiplier * mult, baseSize * baseMultiplier * multiplier * mult);
         transform.localScale = lerped;
+        cSize = lerped.x;
+
+        if (usingWaves)
+        {
+            wavesMaterial.SetFloat("_HighlightsVisibility", (tempSize-1f));
+        }
+    }
+
+    public float GetCurrentSize()
+    {
+        return cSize;
     }
 
     private IEnumerator damage(float dmg = 0)

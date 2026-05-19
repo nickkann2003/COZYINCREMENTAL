@@ -60,7 +60,7 @@ public class BounceTrigger : MonoBehaviour
 
         // TODO: This is hard coded initial size to get around a pooling multiplying scale bug, find a workaround later
         Vector3 initialScale = new Vector3(0.4f, 0.4f, 0.4f);
-        transform.localScale = initialScale * UnityEngine.Random.Range(info.sizeMin, info.sizeMax);
+        transform.localScale = initialScale * UnityEngine.Random.Range(info.sizeMin * Bouba.instance.container.GetCurrentSize(), info.sizeMax * Bouba.instance.container.GetCurrentSize());
     }
 
     // Update is called once per frame

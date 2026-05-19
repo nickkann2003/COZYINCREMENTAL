@@ -45,26 +45,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb44f47ca189dbd4aa3df0001ea0c916, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  startPos: {x: 0, y: 0, z: 0}
-  bounceDuration: 1
-  bounceTo: {x: 1, y: 0.5, z: 0}
-  bounceCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  targetDuration: 0
-  hitDuration: 0.1
-  target: {x: 0, y: 0, z: 0}
-  numBounces: 4
-  onHitEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  finalHitEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  hitParticles: {fileID: 0}
+  info:
+    startPos: {x: 0, y: 0, z: 0}
+    bounceDuration: 1
+    bounceTo: {x: 0, y: 0, z: 0}
+    bounceCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    rotationCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    targetDuration: 0.2
+    hitDuration: 0.2
+    target: {x: 0, y: 0, z: 0}
+    numBounces: 1
+    sizeMin: 0
+    sizeMax: 0
+    onHitEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    finalHitEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    hitParticles: {fileID: 7813201471764580160, guid: c775b544f1ac6e6418342edc516d603f, type: 3}
+  spawner: {fileID: 0}
 --- !u!212 &5969733277376320487
 SpriteRenderer:
   serializedVersion: 2
