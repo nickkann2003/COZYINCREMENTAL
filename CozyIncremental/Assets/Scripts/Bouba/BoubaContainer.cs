@@ -54,7 +54,7 @@ public class BoubaContainer : MonoBehaviour
 
     private void AdjustSize(float mult = 1f)
     {
-        Vector3 lerped = Vector3.Lerp(transform.localScale, new Vector3(baseSize * baseMultiplier * multiplier * mult, baseSize * baseMultiplier * multiplier * mult, baseSize * baseMultiplier * multiplier * mult), 0.3f);
+        Vector3 lerped = Vector3.Lerp(transform.localScale, new Vector3(baseSize * baseMultiplier * multiplier * mult, baseSize * baseMultiplier * multiplier * mult, baseSize * baseMultiplier * multiplier * mult), 0.015f);
         //transform.localScale = new Vector3(baseSize * baseMultiplier * multiplier * mult, baseSize * baseMultiplier * multiplier * mult, baseSize * baseMultiplier * multiplier * mult);
         transform.localScale = lerped;
         cSize = lerped.x;
@@ -72,11 +72,11 @@ public class BoubaContainer : MonoBehaviour
 
     private IEnumerator damage(float dmg = 0)
     {
-        recentDamage += dmg*2.5f;
-        tempSizeMax += 0.1f;
+        recentDamage += dmg*2f;
+        //tempSizeMax += 0.1f;
         yield return new WaitForSeconds(0.2f);
-        tempSizeMax -= 0.1f;
-        recentDamage -= dmg * 1.5f;
+        //tempSizeMax -= 0.1f;
+        recentDamage -= dmg * 1f;
         yield return new WaitForSeconds(4f);
         recentDamage -= dmg;
     }

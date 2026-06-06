@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class Bouba : MonoBehaviour
@@ -11,6 +12,7 @@ public class Bouba : MonoBehaviour
     private float boubaPrivate;
 
     public BoubaContainer container;
+    public TextMeshProUGUI textDisplay;
 
     public Stat boubaPerClick;
 
@@ -137,6 +139,15 @@ public class Bouba : MonoBehaviour
 
         boubaEarned = (int)boubaPrivate;
         container.ContainerDamage(bouba);
+        BoubaChanged();
+    }
+
+    /// <summary>
+    /// Triggers all effects and updates related to bouba changing
+    /// </summary>
+    private void BoubaChanged()
+    {
+        UpdateDisplayText(textDisplay);
     }
 
     private void GainLevelProgress(float progress, bool ignoreMult = false, bool triggerProcs = true)
@@ -214,5 +225,22 @@ public class Bouba : MonoBehaviour
             return;
 
         statusEffects.Add(effect);
+    }
+
+    public void UpdateDisplayText(TextMeshProUGUI display)
+    {
+        int zeroes = 6;
+        string formattedText = boubaEarned.ToString();
+        zeroes = zeroes - formattedText.Length;
+
+        if(zeroes <= 0)
+        {
+            display.text = formattedText;
+            return;
+        }
+
+        string leadingZeroes = new string('0', zeroes);
+        formattedText = $"<color=#AAA>{leadingZeroes}</color>{formattedText}";
+        display.text = formattedText;
     }
 }
