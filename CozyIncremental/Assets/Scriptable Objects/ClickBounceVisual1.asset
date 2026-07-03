@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e124ca3b30fac0a4b96000776ab9cbbd, type: 3}
+  m_Name: ClickBounceVisual1
+  m_EditorClassIdentifier: Assembly-CSharp::SO_BounceSpawner
+  prefab: {fileID: 1201529000373237851, guid: fc9cdf5092c29474ea8d2159e8dd36d0, type: 3}
+  spawnType: 0
+  start: {x: 0, y: 0, z: 0}
+  radius: 1
+  horizontal: 0
+  vertical: 0
+  arcDegrees: 250
+  minDistance: 1
+  maxDistance: 3

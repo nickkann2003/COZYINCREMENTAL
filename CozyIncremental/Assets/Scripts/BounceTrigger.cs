@@ -127,8 +127,8 @@ public class BounceTrigger : MonoBehaviour
     }
 }
 
-[Serializable]
-public class BounceTriggerInfo
+[CreateAssetMenu(fileName = "Bounce Trigger Info", menuName = "Scriptable Objects/Bounce Trigger Info")]
+public class BounceTriggerInfo : ScriptableObject
 {
     [Header("Starting Position")]
     public Vector3 startPos;

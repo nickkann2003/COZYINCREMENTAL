@@ -2078,7 +2078,7 @@ GameObject:
   - component: {fileID: 651845480}
   - component: {fileID: 651845479}
   m_Layer: 0
-  m_Name: BoubaStats
+  m_Name: Bouba
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2174,80 +2174,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  bounceTriggerValues:
-    startPos: {x: 0, y: 0, z: 0}
-    bounceDuration: 1
-    bounceTo: {x: 0, y: 0, z: 0}
-    bounceCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0.0014245014
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.7754106
-        value: 0.9344733
-        inSlope: 0.26210696
-        outSlope: 0.26210696
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    rotationCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0.0028490028
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1
-        value: 360
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    targetDuration: 0.2
-    hitDuration: 0.2
-    target: {x: 0, y: 0, z: 0}
-    numBounces: 1
-    sizeMin: 0.2
-    sizeMax: 0.5
-    onHitEvent:
-      m_PersistentCalls:
-        m_Calls: []
-    finalHitEvent:
-      m_PersistentCalls:
-        m_Calls: []
-    hitParticles: {fileID: 7813201471764580160, guid: c775b544f1ac6e6418342edc516d603f, type: 3}
+  bounceTriggerValues: {fileID: 11400000, guid: 7ed54a5bea76c2b448e12fc71f7228cd, type: 2}
   upgrades:
   - Name: 
     Description: 
@@ -3162,7 +3089,7 @@ GameObject:
   - component: {fileID: 1067088645}
   - component: {fileID: 1067088646}
   m_Layer: 0
-  m_Name: Bouba
+  m_Name: BoubaVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4715,11 +4642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae52bd31bb0625428112831b1f635ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  prefab: {fileID: 1201529000373237851, guid: fc9cdf5092c29474ea8d2159e8dd36d0, type: 3}
-  start: {x: 0, y: 0, z: 0}
-  arcDeg: 250
-  minDistance: 1
-  maxDistance: 3
+  spawnerValues: {fileID: 11400000, guid: 0dfea43ebe5a3d44ba37528613b9f2f7, type: 2}
 --- !u!4 &1614930657
 Transform:
   m_ObjectHideFlags: 0

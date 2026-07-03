@@ -5,13 +5,15 @@ using UnityEngine.InputSystem;
 
 public class BounceSpawner : MonoBehaviour
 {
-    public GameObject prefab;
-    public Vector3 start;
-    public float arcDeg;
 
-    [SerializeField]
-    public float minDistance;
-    public float maxDistance;
+    public SO_BounceSpawner spawnerValues;
+
+    private GameObject prefab;
+    private Vector3 start;
+    private float arcDeg;
+
+    private float minDistance;
+    private float maxDistance;
 
     private Transform bounceTriggerPool;
     public Stack<BounceTrigger> inactiveTriggers = new Stack<BounceTrigger>();
@@ -24,6 +26,12 @@ public class BounceSpawner : MonoBehaviour
     {
         triggerValues = Bouba.instance.bounceTriggerValues;
         bounceTriggerPool = new GameObject("BounceTriggers Pool").transform;
+
+        prefab = spawnerValues.prefab;
+        start = spawnerValues.start;
+        arcDeg = spawnerValues.arcDegrees;
+        minDistance = spawnerValues.minDistance;
+        maxDistance = spawnerValues.maxDistance;
     }
 
     // Update is called once per frame

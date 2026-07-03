@@ -64,7 +64,7 @@ Material:
     - _Divide: 2000
     - _FluctionMinimum: 0.7
     - _FluctuationDivider: 20
-    - _HighlightsVisibility: 0.0000032186508
+    - _HighlightsVisibility: 0.42000544
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Resolution: 28.25
