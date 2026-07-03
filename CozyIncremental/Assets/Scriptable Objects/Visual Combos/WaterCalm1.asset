@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35b4a12e06e1d6f4aa221f89f19e741d, type: 3}
+  m_Name: WaterCalm1
+  m_EditorClassIdentifier: Assembly-CSharp::SO_VisualCombo
+  cellColor: {r: 0, g: 0.9372549, b: 1, a: 1}
+  resolution: 28
+  zoom: 14.8
+  waveSin: 13
+  waveSpeed: 0.0025
+  timeDivide: 0
+  detailResolutionMultiplier: 2
+  speed: 0
+  highlightBright: {r: 0, g: 0.88235295, b: 1, a: 1}
+  highlightDark: {r: 0, g: 0.7294118, b: 1, a: 1}
+  highlightVisibility: 0
+  fluctatonDivider: 0
+  flucationMinimum: 0

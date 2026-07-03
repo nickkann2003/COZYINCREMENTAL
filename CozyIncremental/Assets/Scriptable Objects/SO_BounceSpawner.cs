@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Bounce Spawner", menuName = "Scriptable Objects/Bounce Spawner")]
+[CreateAssetMenu(fileName = "Bounce Spawner", menuName = "Scriptable Objects/Bounce Triggers/Spawner")]
 public class SO_BounceSpawner : ScriptableObject
 {
     public GameObject prefab;

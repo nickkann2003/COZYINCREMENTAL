@@ -60,11 +60,11 @@ Material:
     m_Ints: []
     m_Floats:
     - _BaseSpeed: 0.0025
-    - _DetailResolutionMultiplier: 2
+    - _DetailResolutionMultiplier: 1
     - _Divide: 2000
     - _FluctionMinimum: 0.7
     - _FluctuationDivider: 20
-    - _HighlightsVisibility: 0.42000544
+    - _HighlightsVisibility: 0.000003695488
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Resolution: 28.25
@@ -72,14 +72,15 @@ Material:
     - _ScaleDivide: 56.2
     - _Speed: 0.1
     - _TimeDivide: 2
-    - _WaveChangeDivide: 49998.76
+    - _WaveChangeDivide: 257
+    - _WaveChangeSin: 12
     - _Wave_Divide: 20
     - _Zoom: 14.8
     m_Colors:
     - White: {r: 1, g: 1, b: 1, a: 1}
-    - _Cell_Color: {r: 0, g: 0.9379053, b: 1, a: 1}
-    - _HighlightBright: {r: 0, g: 0.9338684, b: 1, a: 1}
+    - _Cell_Color: {r: 0, g: 0.9372549, b: 1, a: 1}
+    - _HighlightBright: {r: 0, g: 0.92376757, b: 1, a: 1}
     - _HighlightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _HighlightDark: {r: 0, g: 0.7911868, b: 1, a: 1}
+    - _HighlightDark: {r: 0, g: 0.56314397, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

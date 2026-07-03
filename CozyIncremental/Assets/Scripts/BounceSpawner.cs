@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class BounceSpawner : MonoBehaviour
@@ -18,13 +19,13 @@ public class BounceSpawner : MonoBehaviour
     private Transform bounceTriggerPool;
     public Stack<BounceTrigger> inactiveTriggers = new Stack<BounceTrigger>();
 
-    private BounceTriggerInfo triggerValues;
+    private TriggerInfo triggerValues;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        triggerValues = Bouba.instance.bounceTriggerValues;
+        triggerValues = new TriggerInfo(Bouba.instance.bounceTriggerValues);
         bounceTriggerPool = new GameObject("BounceTriggers Pool").transform;
 
         prefab = spawnerValues.prefab;
@@ -69,5 +70,59 @@ public class BounceSpawner : MonoBehaviour
         Vector3 bounceVector = new Vector3(Mathf.Cos(a * Mathf.Deg2Rad) * r, Mathf.Sin(a * Mathf.Deg2Rad) * r, 0);
         bounceVector += transform.position;
         return bounceVector;
+    }
+}
+
+public class TriggerInfo
+{
+    [Header("Starting Position")]
+    public Vector3 startPos;
+
+    [Header("Bounce Vars")]
+    public float bounceDuration = 1f;
+    public Vector3 bounceTo;
+    public AnimationCurve bounceCurve;
+    public AnimationCurve rotationCurve;
+
+    [Header("Targeting Delay")]
+    public float targetDuration = 0.2f;
+
+    [Header("Hit Vars")]
+    public float hitDuration = 0.2f;
+    public Vector3 target;
+
+    [Header("Bounces")]
+    public int numBounces = 1;
+
+    [Header("Size")]
+    public float sizeMin;
+    public float sizeMax;
+
+    [Header("Hit Events")]
+    public UnityEvent onHitEvent;
+    public UnityEvent finalHitEvent;
+
+    [Header("Particles")]
+    public GameObject hitParticles;
+    public TriggerInfo(BounceTriggerInfo t)
+    {
+        startPos = t.startPos;
+        bounceDuration = t.bounceDuration;
+        bounceTo = t.bounceTo;
+        bounceCurve = t.bounceCurve;
+
+        // THIS IS KEY, animation curves were being adjusted on the scriptable object itself
+        rotationCurve = new AnimationCurve();
+        rotationCurve.CopyFrom(t.rotationCurve);
+
+        targetDuration = t.targetDuration;
+        hitDuration = t.hitDuration;
+        target = t.target;
+        numBounces = t.numBounces;
+        sizeMin = t.sizeMin;
+        sizeMax = t.sizeMax;
+        onHitEvent = t.onHitEvent;
+        finalHitEvent = t.finalHitEvent;
+        hitParticles = t.hitParticles;
     }
 }
