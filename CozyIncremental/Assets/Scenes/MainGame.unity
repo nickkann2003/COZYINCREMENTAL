@@ -2862,7 +2862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05f26afc5dc615a4fa15760c454e72d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wavesMaterial: {fileID: 2100000, guid: ffbfce66d5de06d419aa6258eb330716, type: 2}
+  visualComboController: {fileID: 1851268086}
 --- !u!114 &962990126 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2039591609346089920, guid: e5ba38712d004344ba6875f3d34ca87a, type: 3}
@@ -5569,6 +5569,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1851268085}
+  - component: {fileID: 1851268086}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -5593,6 +5594,21 @@ Transform:
   - {fileID: 1261944659}
   m_Father: {fileID: 1067088645}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1851268086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851268084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41b53432a1f67ce4a8f57e05b88325e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VisualComboController
+  combo: {fileID: 11400000, guid: 5e08000d68472614ea182dca13e1b288, type: 2}
+  currentCombo: 0
+  backgroundMaterial: {fileID: 2100000, guid: ffbfce66d5de06d419aa6258eb330716, type: 2}
 --- !u!1001 &1884317012
 PrefabInstance:
   m_ObjectHideFlags: 0

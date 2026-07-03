@@ -21,7 +21,8 @@ public class BoubaContainer : MonoBehaviour
     /// For waves
     /// </summary>
     private bool usingWaves = true;
-    public Material wavesMaterial;
+
+    public VisualComboController visualComboController;
 
     private void Update()
     {
@@ -61,7 +62,9 @@ public class BoubaContainer : MonoBehaviour
 
         if (usingWaves)
         {
-            wavesMaterial.SetFloat("_HighlightsVisibility", (tempSize-1f));
+            //wavesMaterial.SetFloat("_HighlightsVisibility", (tempSize-1f));
+            // DEBUG/TEMP - replace this with combo instead of size, once implemented
+            visualComboController.currentCombo = (tempSize - 1f)*4f;
         }
     }
 

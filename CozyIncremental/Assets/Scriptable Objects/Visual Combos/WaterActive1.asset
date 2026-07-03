@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35b4a12e06e1d6f4aa221f89f19e741d, type: 3}
-  m_Name: WaterCalm1
+  m_Name: WaterActive1
   m_EditorClassIdentifier: Assembly-CSharp::SO_VisualCombo
   cellColor: {r: 0, g: 0.9372549, b: 1, a: 1}
   resolution: 28
@@ -21,7 +21,7 @@ MonoBehaviour:
   detailResolutionMultiplier: 1
   speed: 0.1
   highlightBright: {r: 0, g: 0.88235295, b: 1, a: 1}
-  highlightDark: {r: 0, g: 0.7294118, b: 1, a: 1}
-  highlightVisibility: 0
+  highlightDark: {r: 0, g: 0.5647059, b: 1, a: 1}
+  highlightVisibility: 0.9
   fluctatonDivider: 20
   flucationMinimum: 0.7
