@@ -10,10 +10,26 @@ public class VisualComboController : MonoBehaviour
     private ComboItem previous;
     private ComboItem next;
 
+    public RectTransform comboMeterMask;
+    public RectTransform comboMeter;
+    public float comboMeterMax;
+
+    private float comboMeterPixelWidth;
+    private float comboMaskMinX;
+    private float comboMaskMaxX;
+    private float comboMaxX;
+    private float comboMinX;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        comboMeterPixelWidth = comboMeterMask.sizeDelta.x;
 
+        comboMaskMinX = comboMeterMask.anchoredPosition.x - comboMeterPixelWidth;
+        comboMaskMaxX = comboMeterMask.anchoredPosition.x;
+
+        comboMinX = comboMeter.anchoredPosition.x+comboMeterPixelWidth;
+        comboMaxX = comboMeter.anchoredPosition.x;
     }
 
     // Update is called once per frame
@@ -22,6 +38,14 @@ public class VisualComboController : MonoBehaviour
         GetNextAndPrevious();
 
         internalCombo = Mathf.Lerp(internalCombo, currentCombo, 0.175f*Time.deltaTime);
+        if(internalCombo > 0f)
+        {
+            float meterProgress = (currentCombo) / comboMeterMax;
+            comboMeterMask.anchoredPosition = new Vector2(Mathf.Lerp(comboMaskMinX, comboMaskMaxX, meterProgress), comboMeterMask.anchoredPosition.y);
+            comboMeter.anchoredPosition = new Vector2(Mathf.Lerp(comboMinX, comboMaxX, meterProgress), comboMeter.anchoredPosition.y);
+            Debug.Log(internalCombo + ", " + comboMinX + ", " + comboMaxX + ", " + meterProgress);
+            Debug.Log("LERP: " + Mathf.Lerp(comboMinX, comboMaxX, meterProgress));
+        }
 
         // CASE: Between two thresholds
         if (internalCombo > previous.comboExitThreshold && internalCombo < next.comboEnterThreshold)

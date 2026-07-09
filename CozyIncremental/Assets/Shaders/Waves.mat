@@ -64,7 +64,7 @@ Material:
     - _Divide: 2000
     - _FluctionMinimum: 0.7
     - _FluctuationDivider: 20
-    - _HighlightsVisibility: 0.9
+    - _HighlightsVisibility: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Resolution: 28
@@ -79,8 +79,8 @@ Material:
     m_Colors:
     - White: {r: 1, g: 1, b: 1, a: 1}
     - _Cell_Color: {r: 0, g: 0.9372549, b: 1, a: 1}
-    - _HighlightBright: {r: 0, g: 0.92376757, b: 1, a: 1}
+    - _HighlightBright: {r: 0, g: 0.88235295, b: 1, a: 1}
     - _HighlightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _HighlightDark: {r: 0, g: 0.56314397, b: 1, a: 1}
+    - _HighlightDark: {r: 0, g: 0.7294118, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
